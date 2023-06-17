@@ -23,8 +23,16 @@ public class NameController {
     }
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST , value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public Map<String, String> illegalArgumentException(Exception ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage() + "test");
+        return errors;
+    }
+
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR , value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
-    public Map<String, String> Exceptions(Exception ex) {
+    public Map<String, String> exceptions(Exception ex) {
         Map<String, String> errors = new HashMap<>();
         errors.put("message", ex.getMessage());
         return errors;
